@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import * as chai from 'chai';
 import * as sinonChai from 'sinon-chai';
+import { getMarbles } from './marble-generator';
 import * as marble from './marble-testing';
 import { TestScheduler } from 'rxjs/testing';
 
@@ -174,10 +175,10 @@ module.exports = function(suite: any) {
         }
 
         let message = '\nExpected \n';
-        actual.forEach((x: any) => message += `\t${stringify(x)}\n`);
+        message += `\t${getMarbles(actual)}\t`;
 
         message += '\t\nto deep equal \n';
-        expected.forEach((x: any) => message += `\t${stringify(x)}\n`);
+        message += `\t${getMarbles(expected)}\t`;
 
         chai.assert(passed, message);
       } else {
